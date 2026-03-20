@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="res_config_settings_view_form" model="ir.ui.view">
+    <field name="name">res.config.settings.form.inherit.wht</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="account.res_config_settings_view_form" />
+    <field name="arch" type="xml">
+      <block name="default_taxes_setting_container" position="inside">
+        <setting
+          id="pnd3_txt_format"
+          string="PND3 TXT Format"
+          help="Define the TXT export format for individual partners."
+        >
+          <field name="pnd3_txt_format" widget="text" />
+          <div class="text-muted">
+                        Available placeholders:
+                        %%(partner_vat)s, %%(title)s, %%(firstname)s, %%(lastname)s,
+                        %%(house_number)s, %%(alley)s, %%(sub_alley)s, %%(subdistrict)s,
+                        %%(city)s, %%(state)s, %%(zip)s, %%(document_date)s,
+                        %%(type_income)s, %%(tax_rate)s, %%(base_amount)s,
+                        %%(tax_amount)s, %%(wht_payment)s
+                    </div>
+        </setting>
+        <setting
+          id="pnd53_txt_format"
+          string="PND53 TXT Format"
+          help="Define the TXT export format for company partners."
+        >
+          <field name="pnd53_txt_format" widget="text" />
+          <div class="text-muted">
+                        Available placeholders:
+                        %%(partner_vat)s, %%(branch_number)s, %%(partner_name)s,
+                        %%(document_date)s, %%(type_income)s, %%(tax_rate)s,
+                        %%(base_amount)s, %%(tax_amount)s, %%(wht_payment)s
+                    </div>
+        </setting>
+        <setting
+          id="wht_sequence_id"
+          string="Withholding Tax Sequence"
+          help="Set the sequence used automatically for withholding tax documents when creating new records."
+        >
+          <field name="wht_sequence_id" />
+        </setting>
+      </block>
+    </field>
+  </record>
+</odoo>

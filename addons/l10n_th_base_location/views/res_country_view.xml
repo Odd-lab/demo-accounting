@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="view_country_form_inherit" model="ir.ui.view">
+    <field name="name">res.country.form.inherit</field>
+    <field name="model">res.country</field>
+    <field name="inherit_id" ref="base.view_country_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='phone_code']" position="after">
+        <field id="is_enforce_vat" name="is_enforce_vat" />
+        <field id="is_address_details" name="is_address_details" />
+      </xpath>
+      <xpath expr="//field[@name='code']" position="after">
+        <field id="is_state_city_easy_fill" name="is_state_city_easy_fill" />
+      </xpath>
+    </field>
+  </record>
+</odoo>

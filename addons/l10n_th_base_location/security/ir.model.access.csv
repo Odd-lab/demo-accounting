@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_address_subdistrict_read,address_subdistrict all,model_res_country_subdistrict,base.group_user,1,0,0,0
+access_address_zip_read,address_zip all,base_location.model_res_city_zip,base.group_user,1,0,0,0
+access_address_subdistrict_admin,address_subdistrict admin,model_res_country_subdistrict,base.group_system,1,1,1,1
+access_address_district_admin,address_district admin,model_res_city,base.group_system,1,1,1,1

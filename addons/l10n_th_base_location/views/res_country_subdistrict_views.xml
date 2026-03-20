@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="view_res_country_subdistrict_tree" model="ir.ui.view">
+    <field name="name">res.country.subdistrict.tree</field>
+    <field name="model">res.country.subdistrict</field>
+    <field name="arch" type="xml">
+      <list string="Subdistrict">
+        <field name="name" />
+        <field name="code" />
+        <field name="city_code" />
+        <field name="state_code" />
+      </list>
+    </field>
+  </record>
+
+  <record id="view_res_country_subdistrict_form" model="ir.ui.view">
+    <field name="name">res.country.subdistrict.form</field>
+    <field name="model">res.country.subdistrict</field>
+    <field name="arch" type="xml">
+      <form string="Position">
+        <sheet>
+          <div id="name_sub" name="name_sub" class="oe_title">
+            <label for="name_sub" string="Name" />
+            <h1>
+              <field id="name_sub" name="name" required='1' />
+            </h1>
+          </div>
+          <group id="subdistrict" name="subdistrict">
+            <group id="subdistrict_left" name="subdistrict_left">
+              <field name="local_name" />
+              <field name="city_id" />
+              <field name="state_id" />
+            </group>
+            <group id="subdistrict_right" name="subdistrict_right">
+              <field name="code" />
+              <field name="city_code" />
+              <field name="state_code" />
+            </group>
+          </group>
+          <notebook>
+            <page id="zips" name="zips" string="Zips">
+              <field name="zip_ids" readonly="1" />
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_res_country_subdistrict_search" model="ir.ui.view">
+    <field name="name">res.country.subdistrict.search</field>
+    <field name="model">res.country.subdistrict</field>
+    <field name="arch" type="xml">
+      <search string="Subdistrict">
+        <field
+          name="name"
+          filter_domain="['|', '|', ('name', 'ilike', self), ('local_name', 'ilike', self), ('code', 'ilike', self)]"
+        />
+        <group name="district" string="Group By">
+          <filter
+            name="groupby_district"
+            string="District"
+            context="{'group_by': 'city_id'}"
+          />
+          <filter
+            name="groupby_state"
+            string="State"
+            context="{'group_by': 'state_id'}"
+          />
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="action_res_country_subdistrict" model="ir.actions.act_window">
+    <field name="name">Subdistrict</field>
+    <field name="res_model">res.country.subdistrict</field>
+    <field name="view_mode">list,form</field>
+    <field name="search_view_id" ref="view_res_country_subdistrict_search" />
+  </record>
+
+  <menuitem
+    id="menu_subdistrict"
+    parent="contacts.menu_localisation"
+    action="action_res_country_subdistrict"
+    sequence="4"
+  />
+</odoo>

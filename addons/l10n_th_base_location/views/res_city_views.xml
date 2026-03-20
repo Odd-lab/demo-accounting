@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="view_city_tree_inherit" model="ir.ui.view">
+    <field name="name">res.city.tree.inherit</field>
+    <field name="model">res.city</field>
+    <field name="inherit_id" ref="base_address_extended.view_city_tree" />
+    <field name="arch" type="xml">
+      <field name="zip_ids" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+      <field name="state_id" position="attributes">
+        <attribute name="string">state</attribute>
+      </field>
+    </field>
+  </record>
+
+  <record id="view_city_form_inherit" model="ir.ui.view">
+    <field name="name">res.city.form.inherit</field>
+    <field name="model">res.city</field>
+    <field name="priority">99</field>
+    <field name="inherit_id" ref="base_location.view_city_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//form" position="replace">
+        <form>
+          <sheet>
+            <div id="name_city" name="name_city" class="oe_title">
+              <label for="name_city" string="Name" />
+              <h1>
+                <field id="name_city" name="name" />
+              </h1>
+            </div>
+            <group id="res_city" name="res_city">
+              <group id="res_city_left" name="res_city_left">
+                <field name="local_name" />
+                <field name="state_id" string="State" />
+                <field name="country_id" />
+              </group>
+              <group id="res_city_right" name="res_city_right">
+                <field name="code" required="1" />
+                <field name="state_code" />
+              </group>
+            </group>
+            <notebook>
+              <page name="subdistrict" string="Subdistrict">
+                <field name="subdistrict_ids" readonly="1" />
+              </page>
+              <page name="zips" string="Zips">
+                <field id="zips" name="zip_ids" readonly="1" />
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="view_city_filter" model="ir.ui.view">
+    <field name="name">res.city.search.inherit</field>
+    <field name="model">res.city</field>
+    <field name="inherit_id" ref="base_address_extended.view_city_filter" />
+    <field name="arch" type="xml">
+      <field name="name" position="attributes">
+        <attribute
+          name="filter_domain"
+        >['|', '|', '|', ('name', 'ilike', self), ('local_name', 'ilike', self), ('code', 'ilike', self), ('zipcode', 'ilike', self)]</attribute>
+      </field>
+    </field>
+  </record>
+
+  <record id="base_location.action_res_city_full" model="ir.actions.act_window">
+    <field name="name">District</field>
+  </record>
+
+  <record id="base_location.locations_menu_cities" model="ir.ui.menu">
+    <field name="name">District</field>
+  </record>
+</odoo>

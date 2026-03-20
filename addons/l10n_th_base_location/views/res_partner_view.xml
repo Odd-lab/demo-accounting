@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="view_partner_form_inherit" model="ir.ui.view">
+    <field name="name">view.partner.form.inherit</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+      <field name="country_id" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+
+      <field name="zip_id" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+
+      <field name="state_id" position="attributes">
+        <attribute name="invisible">country_enforce_cities  == True</attribute>
+      </field>
+
+      <field name="zip" position="attributes">
+        <attribute name="invisible">country_enforce_cities == True</attribute>
+      </field>
+
+      <field name="city_id" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </field>
+
+      <field name="street" position="before">
+        <field name="is_address_details" invisible="1" />
+        <field
+          id="contact_country_id"
+          name="country_id"
+          placeholder="Country"
+          class="o_address_country"
+          options='{"no_open": True, "no_create": True}'
+          readonly="type == 'contact' and parent_id != False"
+        />
+        <div
+          id="contact_house_number"
+          name="contact_house_number"
+          class="o_row oe_edit_only"
+        >
+          <field
+            id="contact_house_number"
+            name="house_number"
+            invisible="is_address_details == False"
+            placeholder="No."
+            class="o_address_house_number"
+          />
+          <field
+            id="contact_village_number"
+            name="village_number"
+            invisible="is_address_details == False"
+            placeholder="Moo"
+            class="o_address_village_number"
+          />
+          <field
+            id="contact_village"
+            name="village"
+            invisible="is_address_details == False"
+            placeholder="Village"
+            class="o_address_village"
+          />
+        </div>
+        <div id="contact_building" name="contact_building" class="o_row oe_edit_only">
+          <field
+            id="contact_building"
+            name="building"
+            invisible="is_address_details == False"
+            placeholder="Building"
+            class="o_address_building"
+          />
+          <field
+            id="contact_floor"
+            name="floor"
+            invisible="is_address_details == False"
+            placeholder="Floor"
+            class="o_address_floor"
+          />
+          <field
+            id="contact_room_number"
+            name="room_number"
+            invisible="is_address_details == False"
+            placeholder="Room No."
+            class="o_address_room_number"
+          />
+        </div>
+        <div id="contact_alley" name="contact_alley" class="o_row oe_edit_only">
+          <field
+            id="contact_alley"
+            name="alley"
+            invisible="is_address_details == False"
+            placeholder="Alley"
+            class="o_address_alley"
+          />
+          <field
+            id="contact_sub_alley"
+            name="sub_alley"
+            invisible="is_address_details == False"
+            placeholder="Sub Alley"
+            class="o_address_sub_alley"
+          />
+        </div>
+      </field>
+
+      <field name="street2" position="after">
+        <div id="contact_state" name="contact_state" class="o_row oe_edit_only">
+          <field
+            id="contact_state"
+            name="state_id"
+            placeholder="State"
+            context="{'country_id': country_id, 'zip': zip}"
+            invisible="country_enforce_cities == False"
+            options="{'no_open': True, 'no_create': True}"
+          />
+        </div>
+        <div id="contact_city" name="contact_city" class="o_row oe_edit_only">
+          <field
+            id="contact_subdistrict"
+            name='subdistrict_id'
+            placeholder="Subdistrict"
+            string="Subdistrict"
+            context="{'default_city_id': city_id, 'default_state_id': state_id}"
+            invisible="country_enforce_cities == False"
+            options="{'no_create': True}"
+          />
+          <field
+            id="contact_city"
+            name='city_id'
+            placeholder="City"
+            string="City"
+            context="{'default_country_id': country_id, 'default_name': city, 'default_zipcode': zip, 'default_state_id': state_id}"
+            invisible="country_enforce_cities == False"
+            options="{'no_create': True}"
+          />
+        </div>
+        <div id="contact_zip" name="contact_zip" class="o_row oe_edit_only">
+          <field
+            id="contact_zip"
+            name="zip_id"
+            placeholder="Zip"
+            invisible="country_enforce_cities == False"
+            options="{'no_create': True}"
+          />
+        </div>
+      </field>
+
+      <field name="street2" position="attributes">
+        <attribute name="invisible">is_address_details == True</attribute>
+      </field>
+
+      <xpath
+        expr="//div[@name='div_address']/field[@name='country_id']"
+        position="attributes"
+      >
+        <attribute name="invisible">1</attribute>
+      </xpath>
+
+      <xpath
+        expr="//div[@name='div_address']/field[@name='street2']"
+        position="attributes"
+      >
+        <attribute name="invisible">is_address_details == True</attribute>
+      </xpath>
+
+      <field name="website" position="after">
+        <field name='city_id' invisible="1" />
+      </field>
+
+      <xpath expr="//div[@name='div_address']/field[@name='street']" position="before">
+        <field name="is_address_details" invisible="1" />
+        <field
+          id="address_country_id"
+          name="country_id"
+          placeholder="Country"
+          class="o_address_country"
+          options='{"no_open": True, "no_create": True}'
+        />
+        <div
+          id="address_house_number"
+          name="address_house_number"
+          class="o_row oe_edit_only"
+        >
+          <field
+            id="address_house_number"
+            name="house_number"
+            invisible="is_address_details == False"
+            placeholder="No."
+            class="o_address_house_number"
+          />
+          <field
+            id="address_village_number"
+            name="village_number"
+            invisible="is_address_details == False"
+            placeholder="Moo"
+            class="o_address_village_number"
+          />
+          <field
+            id="address_village"
+            name="village"
+            invisible="is_address_details == False"
+            placeholder="Village"
+            class="o_address_village"
+          />
+        </div>
+        <div id="address_building" name="address_building" class="o_row oe_edit_only">
+          <field
+            id="address_building"
+            name="building"
+            invisible="is_address_details == False"
+            placeholder="Building"
+            class="o_address_building"
+          />
+          <field
+            id="address_floor"
+            name="floor"
+            invisible="is_address_details == False"
+            placeholder="Floor"
+            class="o_address_floor"
+          />
+          <field
+            id="address_room_number"
+            name="room_number"
+            invisible="is_address_details == False"
+            placeholder="Room No."
+            class="o_address_room_number"
+          />
+        </div>
+        <div id="address_alley" name="address_alley" class="o_row oe_edit_only">
+          <field
+            id="address_alley"
+            name="alley"
+            invisible="is_address_details == False"
+            placeholder="Alley"
+            class="o_address_alley"
+          />
+          <field
+            id="address_sub_alley"
+            name="sub_alley"
+            invisible="is_address_details == False"
+            placeholder="Sub Alley"
+            class="o_address_sub_alley"
+          />
+        </div>
+      </xpath>
+
+      <xpath
+        expr="//div[@name='div_address']/field[@name='city_id']"
+        position="attributes"
+      >
+        <attribute name="invisible">1</attribute>
+      </xpath>
+
+      <xpath
+        expr="//div[@name='div_address']/field[@name='zip_id']"
+        position="attributes"
+      >
+        <attribute name="invisible">1</attribute>
+      </xpath>
+
+      <xpath
+        expr="//div[@name='div_address']/field[@name='state_id']"
+        position="attributes"
+      >
+        <attribute name="invisible">country_enforce_cities == True</attribute>
+      </xpath>
+
+      <xpath expr="//div[@name='div_address']/field[@name='zip']" position="attributes">
+        <attribute name="invisible">country_enforce_cities == True</attribute>
+      </xpath>
+
+      <xpath expr="//div[@name='div_address']/field[@name='street2']" position="after">
+        <div id="address_state" name="address_state" class="o_row oe_edit_only">
+          <field
+            id="address_state"
+            name="state_id"
+            placeholder="State"
+            context="{'country_id': country_id, 'zip': zip}"
+            invisible="country_enforce_cities == False"
+            options="{'no_open': True, 'no_create': True}"
+          />
+        </div>
+        <div id="address_city" name="address_city" class="o_row oe_edit_only">
+          <field
+            id="address_city"
+            name='city_id'
+            placeholder="City"
+            string="City"
+            context="{'default_country_id': country_id, 'default_name': city, 'default_zipcode': zip, 'default_state_id': state_id}"
+            invisible="country_enforce_cities == False"
+            options="{'no_create': True}"
+          />
+          <field
+            id="address_subdistrict"
+            name='subdistrict_id'
+            placeholder="Subdistrict"
+            string="Subdistrict"
+            context="{'default_city_id': city_id, 'default_state_id': state_id}"
+            invisible="country_enforce_cities == False"
+            options="{'no_create': True}"
+          />
+        </div>
+        <div id="address_zip" name="address_zip" class="o_row oe_edit_only">
+          <field
+            id="address_zip"
+            name="zip_id"
+            placeholder="Zip"
+            invisible="country_enforce_cities == False"
+            options="{'no_create': True}"
+          />
+        </div>
+      </xpath>
+
+      <xpath expr="//div[@name='div_address']" position="after">
+        <field name='city_id' invisible="1" />
+      </xpath>
+
+      <xpath
+        expr="//page[@name='contact_addresses']//group//field[@name='name']"
+        position="before"
+      >
+        <field
+          id="address_company_type"
+          name="company_type"
+          widget="radio"
+          options="{'horizontal': true}"
+        />
+      </xpath>
+
+      <xpath expr="//kanban//field[@name='is_company']" position="after">
+        <field name="active" />
+      </xpath>
+
+      <xpath expr="//kanban//templates//main" position="before">
+        <t t-if="!record.active.raw_value">
+          <div
+            id="archived_kanban"
+            class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban"
+          >
+            <div class="ribbon ribbon-top-right">
+              <span class="bg-danger">Archived</span>
+            </div>
+          </div>
+        </t>
+      </xpath>
+
+      <xpath
+        expr="//kanban//templates//main//div[@t-if='record.mobile.raw_value']"
+        position="after"
+      >
+        <div class="ms-auto">
+          <button
+            name="action_open_form_view"
+            class="btn btn-primary btn-sm"
+            type="object"
+            icon="oi-view"
+          />
+        </div>
+      </xpath>
+      <xpath expr="//field[@name='vat']" position="before">
+        <field name="branch_type" widget="radio" options="{'horizontal': true}"/>
+        <field name="branch_number" invisible="branch_type != 'branch'" />
+      </xpath>
+    </field>
+  </record>
+</odoo>

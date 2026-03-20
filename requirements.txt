@@ -1,0 +1,4 @@
+openpyxl
+ofxparse
+qifparse
+# odoo-addon-l10n-th-amount-to-text==18.0.1.0.0.3

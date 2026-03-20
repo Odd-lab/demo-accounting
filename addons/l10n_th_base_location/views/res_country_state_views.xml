@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="view_country_state_form_inherit" model="ir.ui.view">
+    <field name="name">res.country.state.form.inherit</field>
+    <field name="model">res.country.state</field>
+    <field name="priority">99</field>
+    <field name="inherit_id" ref="base.view_country_state_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//form" position="replace">
+        <form string="State">
+          <sheet>
+            <div id="name_country_state" class="oe_title">
+              <label for="name_country_state" string="Name" />
+              <h1>
+                <field id="name_country_state" name="name" required="1" />
+              </h1>
+            </div>
+            <group id="country_state" name="country_state">
+              <group id="country_state_group_left" name="country_state_group_left">
+                <field name="local_name" />
+                <field name="code" string="State Code" />
+                <field name="country_id" />
+              </group>
+              <group id="country_state_group_right" name="country_state_group_right" />
+            </group>
+          </sheet>
+        </form>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="view_country_state_search_inherit" model="ir.ui.view">
+    <field name="name">res.country.state.search.inherit</field>
+    <field name="model">res.country.state</field>
+    <field name="inherit_id" ref="base.view_country_state_search" />
+    <field name="arch" type="xml">
+      <field name="name" position="attributes">
+        <attribute
+          name="filter_domain"
+        >['|', '|', ('name', 'ilike', self), ('local_name', 'ilike', self), ('code', 'ilike', self)]</attribute>
+      </field>
+    </field>
+  </record>
+</odoo>
