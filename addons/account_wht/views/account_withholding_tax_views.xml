@@ -66,7 +66,7 @@
             </group>
             <group name="group_1_2">
               <field name="wht_payment" readonly="state != 'draft'" />
-              <field name="pnd_type" readonly="state != 'draft'" />
+              <field name="pnd_type" readonly="state != 'draft'" required="1" />
               <field name="source_document" readonly="state != 'draft'" />
               <field name="is_stamp_signature" />
             </group>
