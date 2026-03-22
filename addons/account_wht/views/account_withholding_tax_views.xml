@@ -81,7 +81,7 @@
               >
                 <list editable="bottom">
                   <field name="account_id" width="184px" optional="show" />
-                  <field name="tax_section" />
+                  <field name="tax_section" required="1"/>
                   <field
                     name="tax_id"
                     options="{'no_open': True, 'no_create': True}"

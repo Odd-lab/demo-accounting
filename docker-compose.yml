@@ -22,6 +22,7 @@
         - db
       ports:
         - "8069:8069" # web
+        - "3000:3000"
       tty: true
       environment:
         - HOST=db
@@ -33,7 +34,9 @@
         - odoo-addons:/mnt/extra-addons
         - ./addons:/mnt/addons
       restart: always
-      command: "/usr/bin/odoo -c /etc/odoo/odoo.conf --dev=qweb,xml"
+      command:
+        sh -c "pip3 install debugpy --break-system-package && python3 -m debugpy --listen
+        0.0.0.0:3000 /usr/bin/odoo -c /etc/odoo/odoo.conf --dev=qweb,xml $OPTIONS"
 
   volumes:
     odoo-data:
