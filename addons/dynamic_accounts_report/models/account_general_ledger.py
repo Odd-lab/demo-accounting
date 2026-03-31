@@ -58,6 +58,7 @@ class AccountGeneralLedger(models.TransientModel):
         account_dict['analytic_ids'] = self.env[
             'account.analytic.account'].search_read(
             [], ['name'])
+        account_dict['account_totals'] = account_totals
         for account in account_ids:
             move_line_id = move_line_ids.filtered(
                 lambda x: x.account_id == account)
@@ -177,6 +178,7 @@ class AccountGeneralLedger(models.TransientModel):
         account_dict['analytic_ids'] = self.env[
             'account.analytic.account'].search_read(
             [], ['name'])
+        account_dict['account_totals'] = account_totals
         for account in account_ids:
             move_line_id = move_line_ids.filtered(
                 lambda x: x.account_id == account)

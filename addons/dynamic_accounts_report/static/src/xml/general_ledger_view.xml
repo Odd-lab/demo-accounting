@@ -268,7 +268,7 @@
                                     <t t-if="state.account_data">
 
                                         <t t-set="i" t-value="0"/>
-                                        <t t-foreach="state.account_data.account_totals"
+                                        <t t-foreach="state.account_data.account_totals || {}"
                                            t-as="account"
                                            t-key="account_index">
                                             <t t-set="i" t-value="i + 1"/>
@@ -330,7 +330,7 @@
                                                 </th>
                                             </tr>
 
-                                            <t t-foreach="state.account_data[account]"
+                                            <t t-foreach="state.account_data[account] || []"
                                                t-as="valuelist"
                                                t-key="valuelist_index">
                                                 <tr class="border-bottom border-gainsboro collapse"
